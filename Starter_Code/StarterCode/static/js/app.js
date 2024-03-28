@@ -33,6 +33,7 @@ function init() {
           
     init();
 
+
     // Updates the charts when the sample is changed
     function optionChanged(sampleId){
         barChart(sampleId)
@@ -45,41 +46,36 @@ function init() {
     function barChart(sampleId){
         d3.json(url).then(function(data) {
         // To get the samples data and store it in the array
-            let sampleData = data.samples;
-            console.log("sampledata is:",sampleData)
+            let sampleData_bar = data.samples;
+            let get_samplevalues = 
+            console.log("sampledata is:",sampleData_bar)
 // Arrow function is used to filter and get the sample values, out_ids and otu_labels for that filtered sample id
 // To check if the id property of each sample object from the array sampleData is equal to the sampleId
-            let filteredValue = sampleData.filter(sample => sample.id == sampleId)
-            let sampleValData = filteredValue[0]
-            console.log("filtered value",filteredValue)
-            console.log("samplevalue",sampleValData)
-            let x_sampleValues = sampleValData.sample_values;
-            let y_otuIds= sampleValData.otu_ids;
-            let otuLabels = sampleValData.otu_labels;
+            let filteredValue_bar= sampleData_bar.filter(sample => sample.id == sampleId)
+            let sampleValData_bar = filteredValue_bar[0]
+            console.log("filtered value",filteredValue_bar)
+            console.log("samplevalue",sampleValData_bar)
+            let x_sampleValues_bar = sampleValData_bar.sample_values;
+            let y_otuIds_bar= sampleValData_bar.otu_ids;
+            let otuLabels_bar = sampleValData_bar.otu_labels;
             // console.log("x is",x_sampleValues);
         
         //    console.log("y_otuIds", y_otuIds);
         //    console.log("otuLabels",otuLabels);
 
         // To display the top 10 OTUs based on the sample values
-           let x_sampleSlice =x_sampleValues.slice(0, 10).reverse();
-           let y_otuIdsSlice = y_otuIds.slice(0, 10).map(id => `OTU ${id}`).reverse();
+           let x_sampleSlice_bar =x_sampleValues_bar.slice(0, 10).reverse();
+           let y_otuIdsSlice_bar = y_otuIds_bar.slice(0, 10).map(id => `OTU ${id}`).reverse();
         //    let y_otuIdsSlice = y_otuIds.slice(0, 10).map(object => object.id).reverse();
-           let otuLabelsSlice = otuLabels.slice(0, 10).reverse();
-           console.log(x_sampleSlice);
-           console.log(y_otuIdsSlice);
-           console.log(otuLabelsSlice);
+           let otuLabelsSlice_bar = otuLabels_bar.slice(0, 10).reverse();
+           console.log(x_sampleSlice_bar);
+           console.log(y_otuIdsSlice_bar);
+           console.log(otuLabelsSlice_bar);
         // Trace1 for the Greek Data
            let trace1 = {
-           x: x_sampleSlice,
-            // x: x_sampleSlice.map(object => object.sample_values),
-        // slicedData.map(object => object.greekSearchResults),
-           y: y_otuIdsSlice,
-            // y: y_otuIdsSlice.map(object => object.otu_ids),
-        // slicedData.map(object => object.greekName),
-           text: otuLabelsSlice,
-            // text: otuLabelsSlice.map(object => object.otu_labels),
-        // slicedData.map(object => object.greekName),
+           x: x_sampleSlice_bar,
+           y: y_otuIdsSlice_bar,
+           text: otuLabelsSlice_bar,
             name: "Belly-Button",
             type: "bar",
             orientation: "h"
@@ -89,7 +85,7 @@ function init() {
            let dataTrace = [trace1];
     // Apply a title to the layout
            let layout = {
-              title: "Top 10 OTU(bacteria) found in Belly-Button of each id",
+              title: "<b>Top 10 OTU(bacteria) found in Belly-Button<br> of each id</b><br>",
               margin: {
                 l: 100,
                 r: 100,
@@ -134,7 +130,7 @@ function init() {
         let dataTrace2 = [trace2];
     // Apply a title to the layout
         let layout2 = {
-                title:"Bubble Chart for each id based on sample size",
+                title:"<b>Bubble Chart for each id based <br> on sample size</b><br>",
                 // showlegend: false,
                 height: 800,
                 width: 800
@@ -162,4 +158,5 @@ function init() {
     })};
    
     sampleMetadata();
+    
     
